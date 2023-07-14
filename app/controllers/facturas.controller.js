@@ -12,129 +12,137 @@ exports.create = (req, res) => {
     return;
   }
 
-  // Create a client
-  const cliente = {
+  // Create a Factura
+  const factura = {
     idUser: !req.body.idUser ? req.body.idUser : null,
-    identificaCli: req.body.identificaCli,
-    nombresapellidosCli: req.body.nombresapellidosCli,
-    direccionCli: req.body.direccionCli,
-    telefCli: req.body.telefCli
+    idCliente: req.body.idCliente,
+    idProd: req.body.idProd,
+    cantidadProdFact: req.body.cantidadProdFact,
+    numFact: req.body.numFact,
+    descripcionProdfact: req.body.descripcionProdfact,
+    precioUnitFact: req.body.precioUnitFact,
+    precioFact: req.body.precioFact,
+    subTotalFact: req.body.subTotalFact,
+    subTotal12Fact: req.body.subTotal12Fact,
+    descuentoFact: req.body.descuentoFact,
+    ivaFact: req.body.ivaFact,
+    totalFact: req.biy.totalFact
   };
 
-  // Save Client in the database
-  Clientes.create(cliente)
+  // Save Factura in the database
+  Facturas.create(factura)
     .then(data => {
       res.send(data);
     })
     .catch(err => {
       res.status(500).send({
         message:
-          err.message || "Some error occurred while creating Client."
+          err.message || "Some error occurred while creating Factura."
       });
     });
 };
 
-// Retrieve all Client from the database.
+// Retrieve all Factura from the database.
 exports.findAll = (req, res) => {
-  const identificaCli = req.query.identificaCli;
-  var condition = identificaCli ? { identificaCli: { [Op.iLike]: `%${identificaCli}%` } } : null;
+  const numFact = req.query.numFact;
+  var condition = numFact ? { numFact: { [Op.iLike]: `%${numFact}%` } } : null;
 
-  Clientes.findAll({ where: condition })
+  Facturas.findAll({ where: condition })
     .then(data => {
       res.send(data);
     })
     .catch(err => {
       res.status(500).send({
         message:
-          err.message || "Some error occurred while retrieving Client."
+          err.message || "Some error occurred while retrieving Factura."
       });
     });
 };
 
-// Find a single Tutorial with an id
+// Find a single Factura with an id
 exports.findOne = (req, res) => {
-  const identificaCli = req.params.identificaCli;
+  const numFact = req.params.numFact;
 
-  Clientes.findByPk(identificaCli)
+  Facturas.findByPk(numFact)
     .then(data => {
       if (data) {
         res.send(data);
       } else {
         res.status(404).send({
-          message: `Cannot find Client with id=${id}.`
+          message: `Cannot find factura with NUmero=${numFact}.`
         });
       }
     })
     .catch(err => {
       res.status(500).send({
-        message: "Error retrieving Client with id=" + id
+        message: "Error retrieving Factura with numFact=" + numFact
       });
     });
 };
 
-// Update a Client by the id in the request
+// Update a Factura by the id in the request
 exports.update = (req, res) => {
-  const idCliente = req.params.idCliente;
+  const idFactura = req.params.idFact;
 
-  Clientes.update(req.body, {
-    where: { idCliente: idCliente }
+  Facturas.update(req.body, {
+    where: { idFactura: idFactura }
   })
     .then(num => {
       if (num == 1) {
         res.send({
-          message: "Client was updated successfully."
+          message: "Factura was updated successfully."
         });
       } else {
         res.send({
-          message: `Cannot update Client with id=${idCliente}. Maybe Client was not found or req.body is empty!`
+          message: `Cannot update Factura with id=${idFactura}. Maybe Factura was not found or req.body is empty!`
         });
       }
     })
     .catch(err => {
       res.status(500).send({
-        message: "Error updating Client with id=" + idCliente
+        message: "Error updating Client with id=" + idFactura
       });
     });
 };
 
-// Delete a Client with the specified id in the request
+// Delete a Factura with the specified id in the request
 exports.delete = (req, res) => {
-  const idCliente = req.params.idCliente;
+  const idFact = req.params.idFact;
 
-  Clientes.destroy({
-    where: { idCliente: idCliente }
+  Facturas.destroy({
+    where: { idFact: idFact }
   })
     .then(num => {
       if (num == 1) {
         res.send({
-          message: "Client was deleted successfully!"
+          message: "Factura was deleted successfully!"
         });
       } else {
         res.send({
-          message: `Cannot delete Client with id=${idCliente}. Maybe Client was not found!`
+          message: `Cannot delete Factura with id=${idFact}. Maybe Factura was not found!`
         });
       }
     })
     .catch(err => {
       res.status(500).send({
-        message: "Could not delete Client with id=" + idCliente
+        message: "Could not delete Factura with id=" + idFact
       });
     });
 };
 
-// Delete all Client from the database.
+// Delete all Factura from the database.
 exports.deleteAll = (req, res) => {
-  Clientes.destroy({
+  Facturas.destroy({
     where: {},
     truncate: false
   })
     .then(nums => {
-      res.send({ message: `${nums} Client were deleted successfully!` });
+      res.send({ message: `${nums} Facturas were deleted successfully!` });
     })
     .catch(err => {
       res.status(500).send({
         message:
-          err.message || "Some error occurred while removing all Client."
+          err.message || "Some error occurred while removing all Facturas."
       });
     });
 };

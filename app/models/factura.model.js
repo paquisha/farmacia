@@ -34,37 +34,37 @@ module.exports = (sequelize, Sequelize) =>{
       field: 'descripcionprod_fact'
     },
     precioUnitFact: {
-      type: DataTypes.DECIMAL(10, 2),
+      type: Sequelize.DECIMAL(10, 2),
       allowNull: false,
       field: 'preciounit_fact'
     },
     precioFact: {
-      type: DataTypes.DECIMAL(10, 2),
+      type: Sequelize.DECIMAL(10, 2),
       allowNull: false,
       field: 'precio_fact'
     },
     subtotalFact: {
-      type: DataTypes.DECIMAL(10, 2),
+      type: Sequelize.DECIMAL(10, 2),
       allowNull: false,
       field: 'subtotal_fact'
     },
     subtotal12Fact: {
-      type: DataTypes.DECIMAL(10, 2),
+      type: Sequelize.DECIMAL(10, 2),
       allowNull: false,
       field: 'subtotal12_fact'
     },
     descuentoFact: {
-      type: DataTypes.DECIMAL(10, 2),
+      type: Sequelize.DECIMAL(10, 2),
       allowNull: false,
       field: 'descuento_fact'
     },
     ivaFact: {
-      type: DataTypes.DECIMAL(10, 2),
+      type: Sequelize.DECIMAL(10, 2),
       allowNull: false,
       field: 'iva_fact'
     },
     totalFact: {
-      type: DataTypes.DECIMAL(10, 2),
+      type: Sequelize.DECIMAL(10, 2),
       allowNull: false,
       field: 'total_fact'
     }
